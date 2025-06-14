@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Project specific
+output/
+*.mp3
+*.mp4
+*.webm
+*.m4a
+*.wav
+*.flac
+audio_temp.*
+downloads/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Test files
+test_*
+*.test.txt
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
