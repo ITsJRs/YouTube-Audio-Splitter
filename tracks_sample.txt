@@ -1,0 +1,15 @@
+# Comments start with #
+# Example: Full Album Upload
+# Video: "Artist Name - Album Title (Full Album)"
+# Format: TIMESTAMP - TRACK NAME
+
+0:00:00 - Intro
+0:02:15 - Dawn of a New Day
+0:06:42 - Electric Dreams
+0:10:30 - Midnight City
+0:14:18 - Neon Lights (feat. Guest Artist)
+0:18:45 - Interlude
+0:20:00 - Summer Memories
+0:24:30 - Road to Nowhere
+0:28:15 - Final Countdown
+0:32:00 - Hidden Track (Bonus)
